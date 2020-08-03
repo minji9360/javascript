@@ -1,4 +1,23 @@
-const something = "Something";
+const nicoInfo = {
+  name: "Nicolas", 
+  age: 55, 
+  gender: "Male",
+  isHandsome: true,
+  favMovies: ["Along the gods", "LOTR", "Oldboy"],
+  favFood: [
+    {
+      name: "Kimchi", 
+      fatty: false
+    },
+    {
+      name: "Cheese burger", 
+      fatty: true
+    }
+  ]
+};
 
-const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", 53, true, "Stuff", something];
-console.log(daysOfWeek);
+console.log(nicoInfo.gender);
+
+nicoInfo.gender = "Female";
+
+console.log(nicoInfo.gender);
