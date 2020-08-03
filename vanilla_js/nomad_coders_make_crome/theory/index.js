@@ -1,1 +1,4 @@
-console.log('Im Working. Im JS. Im Beautiful. Im worth it.');
+const something = "Something";
+
+const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", 53, true, "Stuff", something];
+console.log(daysOfWeek);
