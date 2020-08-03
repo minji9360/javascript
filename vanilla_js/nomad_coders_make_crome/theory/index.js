@@ -16,8 +16,4 @@ const nicoInfo = {
   ]
 };
 
-console.log(nicoInfo.gender);
-
-nicoInfo.gender = "Female";
-
-console.log(nicoInfo.gender);
+console.log(nicoInfo.favFood[0].fatty);
