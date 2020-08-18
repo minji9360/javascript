@@ -3,9 +3,9 @@ import cookieParser from "cookie-parser";
 import express from "express";
 import globalRouter from "./routers/globalRouter";
 import helmet from "helmet";
-import { localsMiddleware } from "./routers/middlewares";
-import morgan from "morgan";
+import { localsMiddleware } from "./middlewares";
 import routes from "./routes";
+import morgan from "morgan";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 

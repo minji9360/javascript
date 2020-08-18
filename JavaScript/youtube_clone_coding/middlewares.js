@@ -1,4 +1,4 @@
-import routes from "../routes";
+import routes from "./routes";
 
 export const localsMiddleware = (request, response, next) => {
     response.locals.siteName = "WeTube";
