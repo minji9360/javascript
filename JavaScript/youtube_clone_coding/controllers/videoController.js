@@ -1,5 +1,7 @@
-export const home = (request, response) => 
-    response.render("home", { pageTitle: "Home" });
+import { videos } from "../db";
+export const home = (request, response) => {
+    response.render("home", { pageTitle: "Home", videos });
+};
 
 export const search = (request, response) => {
     const {
@@ -7,9 +9,6 @@ export const search = (request, response) => {
     } = request;
     response.render("search", { pageTitle: "Search", searchingBy });
 };
-
-export const videos = (request, response) => 
-    response.render("videos", { pageTitle: "Videos" });
 
 export const upload = (request, response) => 
     response.render("upload", { pageTitle: "Upload" });
