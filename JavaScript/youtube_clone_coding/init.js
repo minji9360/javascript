@@ -1,7 +1,9 @@
 import "./db";
 import app from "./app";
+import dotenv from "dotenv";
+dotenv.config();
 
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 const handleListening = () => 
     console.log(`✅ Listening on: http://localhost:${PORT}`);
