@@ -5,6 +5,7 @@ dotenv.config();
 mongoose.connect(
     process.env.MONGO_URL, 
     {
+        useUnifiedTopology: true,
         useNewUrlParser: true,
         useFindAndModify: false
     }
