@@ -1,4 +1,7 @@
+import multer from "multer";
 import routes from "./routes";
+
+const multerVideo = multer({ dest: "videos/" });
 
 export const localsMiddleware = (request, response, next) => {
     response.locals.siteName = "WeTube";
@@ -9,3 +12,5 @@ export const localsMiddleware = (request, response, next) => {
     }
     next();
 }
+
+export const uploadVideo = multerVideo.single("videoFile");
