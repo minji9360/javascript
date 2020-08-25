@@ -36,8 +36,18 @@ export const postUpload = async(request, response) => {
     response.redirect(routes.videoDetail(newVideo.id));
 };
 
-export const videoDetail = (request, response) => 
-    response.render("videoDetail", { pageTitle: "Video Detail" });
+export const videoDetail = async (request, response) => { 
+    const {
+        params: {id}
+    } = request;
+    try {
+        const video = await Video.findById(id);
+        response.render("videoDetail", { pageTitle: "Video Detail", video });
+    } catch (error) {
+        console.log(error);
+        response.redirect(routes.home);
+    }
+}
 
 export const editVideo = (request, response) => 
     response.render("editVideo", { pageTitle: "Edit Video" });
