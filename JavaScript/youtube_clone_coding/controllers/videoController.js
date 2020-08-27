@@ -13,10 +13,18 @@ export const home = async (request, response) => {
 };
 
 // Search
-export const search = (request, response) => {
+export const search = async (request, response) => {
 	const {
 		query: { term: searchingBy },
 	} = request;
+	let videos = [];
+	try {
+		videos = await Video.find({
+			title: { $regex: searchingBy, $options: "i" },
+		});
+	} catch (error) {
+		console.log(error);
+	}
 	response.render("search", { pageTitle: "Search", searchingBy, videos });
 };
 
