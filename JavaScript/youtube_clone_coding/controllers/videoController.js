@@ -42,7 +42,7 @@ export const videoDetail = async (request, response) => {
     } = request;
     try {
         const video = await Video.findById(id);
-        response.render("videoDetail", { pageTitle: "Video Detail", video });
+        response.render("videoDetail", { pageTitle: video.title, video });
     } catch (error) {
         console.log(error);
         response.redirect(routes.home);
@@ -80,8 +80,7 @@ export const deleteVideo = async (request, response) => {
     } = request;
     try {
         await Video.findOneAndRemove({ _id: id });
-        response.redirect(routes.home);
     } catch (error) {
-        response.redirect(routes.home);
     }
+    response.redirect(routes.home);
 };
