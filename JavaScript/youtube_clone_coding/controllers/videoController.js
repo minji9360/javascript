@@ -54,7 +54,7 @@ export const videoDetail = async (request, response) => {
 	} = request;
 	try {
 		const video = await Video.findById(id);
-		response.render("videoDetail", { pageTitle: video.title });
+		response.render("videoDetail", { pageTitle: video.title, video });
 	} catch (error) {
 		console.log(error);
 		response.redirect(routes.home);
