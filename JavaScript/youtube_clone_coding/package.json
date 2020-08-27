@@ -1,29 +1,33 @@
 {
-  "name": "youtube_clone_coding",
-  "version": "1.0.0",
-  "description": "Cloning Youtube with Vanilla and NodeJS",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec babel-node init.js --delay 2"
-  },
-  "author": "minji kim",
-  "license": "ISC",
-  "dependencies": {
-    "@babel/core": "^7.11.1",
-    "@babel/node": "^7.10.5",
-    "@babel/preset-env": "^7.11.0",
-    "body-parser": "^1.19.0",
-    "cookie-parser": "^1.4.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "helmet": "^4.0.0",
-    "mongoose": "^5.10.0",
-    "morgan": "^1.10.0",
-    "multer": "^1.4.2",
-    "pug": "^3.0.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.4"
-  }
+	"name": "youtube_clone_coding",
+	"version": "1.0.0",
+	"description": "Cloning Youtube with Vanilla and NodeJS",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "nodemon --exec babel-node init.js --delay 2"
+	},
+	"author": "minji kim",
+	"license": "ISC",
+	"dependencies": {
+		"@babel/core": "^7.11.1",
+		"@babel/node": "^7.10.5",
+		"@babel/preset-env": "^7.11.0",
+		"body-parser": "^1.19.0",
+		"cookie-parser": "^1.4.5",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"helmet": "^4.0.0",
+		"mongoose": "^5.10.0",
+		"morgan": "^1.10.0",
+		"multer": "^1.4.2",
+		"pug": "^3.0.0"
+	},
+	"devDependencies": {
+		"eslint": "^7.7.0",
+		"eslint-config-prettier": "^6.11.0",
+		"eslint-plugin-prettier": "^3.1.4",
+		"nodemon": "^2.0.4",
+		"prettier": "^2.1.1"
+	}
 }
