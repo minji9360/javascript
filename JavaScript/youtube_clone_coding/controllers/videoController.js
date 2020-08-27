@@ -1,6 +1,7 @@
 import routes from "../routes";
 import Video from "../models/Video";
 
+// Home
 export const home = async (request, response) => {
 	try {
 		const videos = await Video.find({}).sort({ _id: -1 });
@@ -11,6 +12,7 @@ export const home = async (request, response) => {
 	}
 };
 
+// Search
 export const search = (request, response) => {
 	const {
 		query: { term: searchingBy },
@@ -18,6 +20,7 @@ export const search = (request, response) => {
 	response.render("search", { pageTitle: "Search", searchingBy, videos });
 };
 
+// Upload
 export const getUpload = async (request, response) =>
 	response.render("upload", { pageTitle: "Upload" });
 
@@ -36,19 +39,21 @@ export const postUpload = async (request, response) => {
 	response.redirect(routes.videoDetail(newVideo.id));
 };
 
+// Detail
 export const videoDetail = async (request, response) => {
 	const {
 		params: { id },
 	} = request;
 	try {
 		const video = await Video.findById(id);
-		response.render("videoDetail", { pageTitle: video.title, video });
+		response.render("videoDetail", { pageTitle: video.title });
 	} catch (error) {
 		console.log(error);
 		response.redirect(routes.home);
 	}
 };
 
+// Edit Video
 export const getEditVideo = async (request, response) => {
 	const {
 		params: { id },
@@ -77,12 +82,15 @@ export const postEditVideo = async (request, response) => {
 	}
 };
 
+// Delete Video
 export const deleteVideo = async (request, response) => {
 	const {
 		params: { id },
 	} = request;
 	try {
 		await Video.findOneAndRemove({ _id: id });
-	} catch (error) {}
+	} catch (error) {
+		console.log(error);
+	}
 	response.redirect(routes.home);
 };
