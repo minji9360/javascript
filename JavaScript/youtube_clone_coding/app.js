@@ -5,6 +5,8 @@ import globalRouter from "./routers/globalRouter";
 import helmet from "helmet";
 import { localsMiddleware } from "./middlewares";
 import morgan from "morgan";
+import mongoose from "mongoose";
+import MongoStore from "connect-mongo";
 import passport from "passport";
 import routes from "./routes";
 import session from "express-session";
@@ -14,6 +16,8 @@ import videoRouter from "./routers/videoRouter";
 import "./passport";
 
 const app = express();
+
+const CookieStore = MongoStore(session);
 
 app.use(helmet());
 app.set("view engine", "pug");
@@ -28,6 +32,7 @@ app.use(
 		secret: process.env.COOKIE_SECRET,
 		resave: true,
 		saveUninitialized: false,
+		store: new CookieStore({ mongooseConnection: mongoose.connection }),
 	})
 );
 app.use(passport.initialize());
