@@ -76,8 +76,17 @@ export const getMe = (request, response) => {
 	});
 };
 
-export const userDetail = (request, response) =>
-	response.render("userDetail", { pageTitle: "User Detail" });
+export const userDetail = async (request, response) => {
+	const {
+		params: { id },
+	} = request;
+	try {
+		const user = await User.findById(id);
+		response.render("userDetail", { pageTitle: "User Detail", user });
+	} catch (error) {
+		response.redirect(routes.home);
+	}
+};
 export const editProfile = (request, response) =>
 	response.render("editProfile", { pageTitle: "Edit Profile" });
 export const changePassword = (request, response) =>
