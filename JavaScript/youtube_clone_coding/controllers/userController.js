@@ -118,7 +118,25 @@ export const userDetail = async (request, response) => {
 		response.redirect(routes.home);
 	}
 };
-export const editProfile = (request, response) =>
+export const getEditProfile = (request, response) =>
 	response.render("editProfile", { pageTitle: "Edit Profile" });
+
+export const postEditProfile = async (request, response) => {
+	const {
+		body: { name, email },
+		file,
+	} = request;
+	try {
+		await User.findByIdAndUpdate(request.user.id, {
+			name,
+			email,
+			avatarUrl: file ? file.path : request.user.avatarUrl,
+		});
+		response.redirect(routes.me);
+	} catch (error) {
+		response.render("editProfile", { pageTitle: "Edit Profile" });
+	}
+};
+
 export const changePassword = (request, response) =>
 	response.render("changePassword", { pageTitle: "Chnage Password" });
