@@ -1,6 +1,7 @@
 import passport from "passport";
 import routes from "../routes";
 import User from "../models/User";
+import { response } from "express";
 
 export const getJoin = (request, response) =>
 	response.render("join", { pageTitle: "Join" });
@@ -134,9 +135,27 @@ export const postEditProfile = async (request, response) => {
 		});
 		response.redirect(routes.me);
 	} catch (error) {
-		response.render("editProfile", { pageTitle: "Edit Profile" });
+		response.redirect(routes.editProfile);
 	}
 };
 
-export const changePassword = (request, response) =>
+export const getChangePassword = (request, response) =>
 	response.render("changePassword", { pageTitle: "Chnage Password" });
+
+export const postChangePassword = async (request, response) => {
+	const {
+		body: { oldPassword, newPassword, newPassword1 },
+	} = request;
+	try {
+		if (newPassword !== newPassword1) {
+			response.status(400);
+			response.redirect(`/users/${routes.changePassword}`);
+			return;
+		}
+		await request.user.changePassword(oldPassword, newPassword);
+		response.redirect(routes.me);
+	} catch (error) {
+		response.status(400);
+		response.redirect(`/users/${routes.changePassword}`);
+	}
+};
