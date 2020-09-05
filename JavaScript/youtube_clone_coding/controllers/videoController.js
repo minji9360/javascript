@@ -41,9 +41,10 @@ export const postUpload = async (request, response) => {
 		fileUrl: path,
 		title,
 		description,
+		creator: request.user.id,
 	});
-	console.log(newVideo);
-	// To Do: Upload and save video
+	request.user.videos.push(newVideo.id);
+	request.user.save();
 	response.redirect(routes.videoDetail(newVideo.id));
 };
 
@@ -53,7 +54,8 @@ export const videoDetail = async (request, response) => {
 		params: { id },
 	} = request;
 	try {
-		const video = await Video.findById(id);
+		const video = await Video.findById(id).populate("creator");
+		console.log(video);
 		response.render("videoDetail", { pageTitle: video.title, video });
 	} catch (error) {
 		console.log(error);
