@@ -40,11 +40,64 @@
 > (7) 5 4 6 <b>8</b> (10) 9  
 > 또 양 옆의 집합들을 각각 정렬 반복
 
-## 시간 복잡도 : O(N * logN)
+## 구현
+```c
+#include <stdio.h>
+
+int number = 10;
+int data[10] = {1, 10, 5, 8, 7, 6, 4, 3, 2, 9};
+
+void quickSort(int *data, int start, int end) {
+	int pivot = start;
+	int i = start + 1;
+	int j = end;
+	int temp;
+
+	if (start >= end) // 원소가 1개인 경우
+		return;
+
+	while (i <= j) // 엇갈릴 때까지 반복
+	{
+		while (data[i] <= data[pivot]) // 키 값보다 큰 값을 만날 때까지
+			i++; // 오른쪽으로 이동
+		while (data[j] >= data[pivot] && j > start) // 키 값보다 작은 값을 만날 때까지
+													// start 값을 넘어가면 pivot값이 나오고, 그 이상은 가면 안되니까 조건을 걸어줌
+			j---;
+		if (i > j) // 현재 엇갈린 상태면 키 값과 교체
+		{
+			temp = data[j];
+			data[j] = data[pivot];
+			data[pivot] = temp;
+		}
+		else
+		{
+			temp = data[j];
+			data[j] = data[i];
+			data[i] = temp;
+		}
+	}
+	quickSort(data, start, j - 1); // 재귀함수
+	quickSort(data, j + 1, end); // pivot이 바뀔 때마다 분할 정렬을 해야하니까
+}
+
+int main(void)
+{
+	quickSort(data, 0, number - 1);
+	for (int i = 0; i < number; i++)
+		printf("%d ", data[i]);
+}
+```
+
+## 시간 복잡도 : O(N * logN)이지만 최악의 경우 O(N^2)
 잘게 쪼갠 후, 각자 정렬하고 다시 합치기 때문에 훨씬 적은 수만큼의 연산을 하게 된다.  
 데이터의 개수 N과 큰 수와 작은 수의 집합으로 계속해서 반 씩 나눈다는 의미에서 log₂N이라고 볼 수 있다.
 > 1 2 3 4 5 6 7 8 9 10  
 > 선택 정렬 : N ^ 2 = 10 * 10 = 100  
 > 1 2 3 4 5 / 6 7 8 9 10  
 > (5 * 5 = 25) + (5 * 5 = 25) = 50  
-
+이미 정렬이 되어 있거나 거의 정렬이 되어 있는 경우의 시간 복잡도는 O(N^2)가 된다.  
+> (1) 2 3 4 5 6 7 8 9 10  
+> 큰 값 : 10, 작은 값 : 2  
+> <b>1</b> 2 3 4 5 6 7 8 9 10  
+이런 식으로, 분할 정렬의 이점을 사용하지 못하고 하나씩 정렬된다.  
+삽입 정렬의 경우에는 이런 경우 굉장히 빠르게 동작하기 때문에, 항상 가장 빠른 알고리즘은 없다. 정렬할 데이터의 특성에 따라 적절한 알고리즘을 선택해야 한다.
