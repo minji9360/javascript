@@ -1,7 +1,6 @@
 import passport from "passport";
 import routes from "../routes";
 import User from "../models/User";
-import { response } from "express";
 
 export const getJoin = (request, response) =>
 	response.render("join", { pageTitle: "Join" });
@@ -89,7 +88,6 @@ export const facebookLoginCallback = async (_, __, profile, cb) => {
 	} catch (error) {
 		return cb(error);
 	}
-	console.log(accessToken, refreshToken, profile, cb);
 };
 
 export const postFacebookLogin = (request, response) => {
@@ -114,12 +112,12 @@ export const userDetail = async (request, response) => {
 	} = request;
 	try {
 		const user = await User.findById(id).populate("videos");
-		console.log(user);
 		response.render("userDetail", { pageTitle: "User Detail", user });
 	} catch (error) {
 		response.redirect(routes.home);
 	}
 };
+
 export const getEditProfile = (request, response) =>
 	response.render("editProfile", { pageTitle: "Edit Profile" });
 
