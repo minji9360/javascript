@@ -1,19 +1,18 @@
-import "@babel/polyfill";
-import bodyParser from "body-parser";
-import cookieParser from "cookie-parser";
 import express from "express";
-import globalRouter from "./routers/globalRouter";
-import helmet from "helmet";
-import { localsMiddleware } from "./middlewares";
 import morgan from "morgan";
-import mongoose from "mongoose";
-import MongoStore from "connect-mongo";
+import helmet from "helmet";
+import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
 import passport from "passport";
-import routes from "./routes";
+import mongoose from "mongoose";
 import session from "express-session";
 import path from "path";
+import MongoStore from "connect-mongo";
+import { localsMiddleware } from "./middlewares";
+import routes from "./routes";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
+import globalRouter from "./routers/globalRouter";
 import apiRouter from "./routers/apiRouter";
 
 import "./passport";
