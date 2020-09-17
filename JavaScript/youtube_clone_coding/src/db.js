@@ -2,11 +2,14 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 
-mongoose.connect(process.env.MONGO_URL_PROD, {
-	useUnifiedTopology: true,
-	useNewUrlParser: true,
-	useFindAndModify: false,
-});
+mongoose.connect(
+	process.env.PRODUCTION ? process.env.MONGO_URL_PROD : process.env.MONGO_URL,
+	{
+		useUnifiedTopology: true,
+		useNewUrlParser: true,
+		useFindAndModify: false,
+	}
+);
 const db = mongoose.connection;
 const handleOpen = () => console.log("✅  Connected to DB");
 const handleError = (error) =>
